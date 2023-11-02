@@ -1,4 +1,3 @@
-
 def initialize_arr(m, n):
     arr = [[0 for _ in range(n)] for _ in range(m)]
     num = 1
@@ -13,25 +12,28 @@ def plant_and_collect_pumpkins(m, n, arr=None):
     if arr is None:
         arr = initialize_arr(m, n)
     res = []
-    left_border = 0
-    right_border = n - 1
+    bottom_border = n - 1
+    top_border = 0
     move_ = False
     i = 0
     j = 0
     while True:
-        if res.__len__() == n * m:
+        if len(res) == n * m:
             return res
-        if j == left_border:
-            for k in range(n):
-                res.append(arr[i][k])
-                j = k
+        if i == top_border:
+            for k in range(m):
+                res.append(arr[k][j])
+                i = k
                 move_ = False
+            j += 1
         if move_:
-            if j == right_border:
-                for k in range(n - 1, -1, -1):
-                    res.append(arr[i][k])
-                    j = k
+            if i == bottom_border:
+                for k in (m - 1, -1, -1):
+                    res.append(arr[k][j])
+                    i = k
+                    move_ = False
+                j += 1
         else:
             move_ = True
-        i += 1
+
 
